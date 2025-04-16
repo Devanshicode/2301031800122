@@ -1,0 +1,57 @@
+📝 Mini Project Title: "Covid-19 Data Analysis using Pandas"
+
+📂 Project Files:
+covid_data.csv (Dataset)
+covid_analysis.py (Python code file)
+report.md (Your project documentation/report)
+
+🔧 Tools & Libraries:
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+📈 Features to Implement:
+1. Load and Inspect the Data
+df = pd.read_csv("covid_data.csv")
+print(df.head())
+print(df.info())
+print(df.describe())
+
+2. Clean the Data
+df['Date'] = pd.to_datetime(df['Date'])
+df.fillna(0, inplace=True)
+
+3. Analyze the Data
+total_cases = df.groupby('Date')['Confirmed'].sum()
+top_states = df.groupby('State')['Confirmed'].max().sort_values(ascending=False).head(10)
+
+4. Visualize the Data
+# Line plot
+plt.figure(figsize=(10, 6))
+total_cases.plot()
+plt.title('Total Confirmed Cases Over Time')
+plt.xlabel('Date')
+plt.ylabel('Confirmed Cases')
+plt.grid(True)
+plt.show()
+
+# Bar plot
+top_states.plot(kind='bar', title='Top 10 States with Highest Cases')
+plt.ylabel('Confirmed Cases')
+plt.xticks(rotation=45)
+plt.show()
+
+5. Create a Summary Report
+summary = {
+    'Max Single Day Cases': df['Confirmed'].max(),
+    'Date Most Deaths': df.loc[df['Deaths'].idxmax(), 'Date'],
+    'Average Daily Recovery Rate': round(df['Recovered'].mean(), 2)
+}
+print(summary)
+
+📋 Deliverables
+Source Code: covid_analysis.py
+
+
+
+
